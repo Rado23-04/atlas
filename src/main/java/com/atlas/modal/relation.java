@@ -1,0 +1,42 @@
+package com.atlas.modal;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Entity
+@Table(name = "relation")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
+public class relation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idea_a_id", nullable = false)
+    private Ideas ideaA;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idea_b_id", nullable = false)
+    private Ideas ideaB;
+    private String relationType;
+    private Double weight;
+    @Column(columnDefinition = "TEXT")
+    private String note;
+
+}
